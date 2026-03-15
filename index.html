@@ -1,15 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Oyun Motoru Seçici | En Uygun Game Engine'i Bul</title>
+    <meta name="description" content="İhtiyaçlarınıza en uygun oyun motorunu bulmanıza yardımcı olan dinamik filtreleme ve karşılaştırma aracı.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <p>Yapay Zeka Akademisi - Anadolu Üniversitesi - Ekrem Gümüş</p>
+    <header>
+        <div class="container">
+            <h1>Senin İçin En Uygun <span class="gradient-text">Game Engine</span> Hangisi?</h1>
+            <p>Projelerinize, yeteneklerinize ve hedeflerinize en uygun oyun motorunu keşfedin. Aşağıdaki filtreleri kullanarak size özel seçenekleri görün.</p>
+        </div>
+    </header>
 
+    <main class="container main-grid">
+        <aside class="filter-panel" id="filterPanel">
+            <div class="filter-header">
+                <h2>Filtreler</h2>
+                <button id="resetFilters" class="btn-text">Sıfırla</button>
+            </div>
+
+            <div class="filter-group">
+                <h3>Platform</h3>
+                <div class="checkbox-list">
+                    <label class="checkbox-item"><input type="checkbox" name="platform" value="PC"> <span>PC</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="platform" value="Mobil"> <span>Mobil</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="platform" value="Web"> <span>Web</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="platform" value="Konsol"> <span>Konsol</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="platform" value="Cross Platform"> <span>Cross Platform</span></label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Grafik Türü</h3>
+                <div class="checkbox-list">
+                    <label class="checkbox-item"><input type="checkbox" name="graphics" value="2D"> <span>2D</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="graphics" value="3D"> <span>3D</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="graphics" value="2D + 3D"> <span>2D + 3D</span></label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Programlama Dili</h3>
+                <div class="checkbox-list">
+                    <label class="checkbox-item"><input type="checkbox" name="language" value="C#"> <span>C#</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="language" value="C++"> <span>C++</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="language" value="GDScript"> <span>GDScript</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="language" value="JavaScript"> <span>JavaScript</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="language" value="Visual Scripting"> <span>Visual Scripting</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="language" value="Python"> <span>Python</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="language" value="Lua"> <span>Lua</span></label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Lisans Modeli</h3>
+                <div class="checkbox-list">
+                    <label class="checkbox-item"><input type="checkbox" name="license" value="Ücretsiz"> <span>Ücretsiz</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="license" value="Açık Kaynak"> <span>Açık Kaynak</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="license" value="Royalty"> <span>Royalty</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="license" value="Ticari Lisans"> <span>Ticari Lisans</span></label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Öğrenme Kolaylığı</h3>
+                <div class="checkbox-list">
+                    <label class="checkbox-item"><input type="checkbox" name="learning" value="Başlangıç"> <span>Başlangıç</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="learning" value="Orta"> <span>Orta</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="learning" value="İleri"> <span>İleri</span></label>
+                </div>
+            </div>
+        </aside>
+
+        <section class="results-area">
+            <div class="results-header">
+                <p id="resultCount">Yükleniyor...</p>
+            </div>
+            <div id="engineGrid" class="engine-grid">
+                <!-- Engine cards will be rendered here -->
+            </div>
+            <div id="noResults" class="no-results hidden">
+                <div class="no-results-icon">🔍</div>
+                <h3>Eşleşen Motor Bulunamadı</h3>
+                <p>Lütfen filtrelerinizi genişletmeyi deneyin.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for details -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modalBody">
+                <!-- Content will be injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Oyun Motoru Seçici. Tüm bilgileri resmî web sitelerinden doğrulayın.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
 </body>
-
 </html>
