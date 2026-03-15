@@ -10,7 +10,7 @@ const engines = [
         description: "Dünyanın en popüler çok platformlu oyun motoru. Geniş topluluk ve asset mağazası ile her seviyeye uygun.",
         platforms: ["PC", "Mobil", "Web", "Konsol", "Cross Platform"],
         languages: ["C#"],
-        graphics: ["2D + 3D"],
+        graphics: ["2D", "3D"],
         license: "Royalty",
         learning: "Orta",
         asset_store: "Var (Çok Geniş)",
@@ -40,7 +40,7 @@ const engines = [
         description: "Hafif, ücretsiz ve tamamen açık kaynaklı. 2D ve 3D projeler için hızla büyüyen bir alternatif.",
         platforms: ["PC", "Mobil", "Web", "Konsol", "Cross Platform"],
         languages: ["C#", "GDScript", "C++"],
-        graphics: ["2D + 3D"],
+        graphics: ["2D", "3D"],
         license: "Açık Kaynak",
         learning: "Başlangıç",
         asset_store: "Var (Gelişmekte)",
@@ -175,7 +175,7 @@ const engines = [
         description: "Mobil ve HTML5 oyunlar için optimize edilmiş, TypeScript/C++ destekli motor.",
         platforms: ["PC", "Mobil", "Web"],
         languages: ["JavaScript", "C++"],
-        graphics: ["2D + 3D"],
+        graphics: ["2D", "3D"],
         license: "Açık Kaynak",
         learning: "Orta",
         asset_store: "Var",
@@ -205,7 +205,7 @@ const engines = [
         description: "C# ile derinlemesine kontrol sunan (Ms-PL lisanslı) cross-platform framework.",
         platforms: ["PC", "Mobil", "Konsol"],
         languages: ["C#"],
-        graphics: ["2D + 3D"],
+        graphics: ["2D", "3D"],
         license: "Açık Kaynak",
         learning: "İleri",
         asset_store: "Yok",
@@ -265,7 +265,13 @@ function filterEngines() {
 
         // Lisans filtresi
         if (activeFilters.license.length > 0) {
-            if (!activeFilters.license.some(li => engine.license.includes(li))) return false;
+            const matchesLicense = activeFilters.license.some(li => {
+                if (li === "Ücretsiz") {
+                    return engine.license.includes("Ücretsiz") || engine.license.includes("Açık Kaynak");
+                }
+                return engine.license.includes(li);
+            });
+            if (!matchesLicense) return false;
         }
 
         // Öğrenme filtresi
